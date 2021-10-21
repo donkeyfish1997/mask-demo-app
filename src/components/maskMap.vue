@@ -11,6 +11,7 @@ export default {
     return {
       map: {},
       markers: [],
+      markerGroup: "",
     };
   },
   mounted() {
@@ -23,6 +24,7 @@ export default {
         '<a target="_blank" href="https://www.openstreetmap.org/"> OpenStreetMap貢獻者</a>',
       maxZoom: 18,
     }).addTo(this.map);
+    this.markerGroup = L.layerGroup().addTo(this.map);
   },
   computed: {
     ...mapGetters(["currDistrictInfo", "filteredStores"]),
@@ -32,6 +34,7 @@ export default {
       this.map.panTo(new L.LatLng(dist.latitude, dist.longitude));
     },
     filteredStores(sotres) {
+      this.markerGroup.clearLayers();
       sotres.forEach((e) => this.addMarker(e));
     },
   },
@@ -48,7 +51,7 @@ export default {
         shadowSize: [41, 41],
       };
       const marker = L.marker([item.longitude, item.latitud], ICON)
-        .addTo(this.map)
+        .addTo(this.markerGroup)
         .bindPopup(`<h2 class="popup-name">${item.name}</h2>`);
 
       marker.markerId = item.id;
