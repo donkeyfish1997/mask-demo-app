@@ -1,24 +1,58 @@
 #app {
   display: block;
-  position: fixed;
-  overflow: hidden;
+  position: relative;
+  // overflow: hidden;
   width: 100%;
   height: 100vh;
+  background-color: #abc;
   * {
     box-sizing: border-box;
   }
   > div {
-    float: left;
   }
 }
 
 .aside-menu {
-  width: 25%;
-  height: 100%;
-  border-right: 1px solid #aaa;
-  background-color: #f1f1f1;
+  position: absolute;
+  z-index: 2;
+  width: 340px;
+  height: 100vh;
   overflow-y: scroll;
+  margin-left: -300px;
+  transition: 0.5s;
+  .container {
+    width: 300px;
+    height: 100%;
+    background-color: #f1f1f1;
+    border-right: 1px solid #aaa;
+  }
+  &.open {
+    margin-left: 0px;
+    .openBtn > p{transform: rotate(180deg);}
+  }
+  .openBtn {
+    position: absolute;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.46);
+    width: 40px;
+    height: 80px;
+    background-color: #abc;
+    font-size: 40px;
+    top: 0;
+    z-index: 100;
+    bottom: 0;
+    margin: auto;
+    text-align: center;
+    line-height: 80px;
+    border-radius: 0 10px 10px 0;
+    left: 300px;
+    p{
+      line-height: 80px;
+    }
+  }
   label {
+    top: 0;
+    left: 0;
     position: relative;
     margin-right: 2em;
     display: block;
@@ -42,11 +76,12 @@
 }
 
 .mask-map {
+  // display: none;
   position: relative;
-  width: 75%;
-  height: 100%;
+  width: 100%;
+  height: 100vh;
   background-color: #aaa;
-  z-index: 10;
+  z-index: 1;
   &.full {
     width: 100%;
   }
